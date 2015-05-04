@@ -5,3 +5,8 @@ Swift Horizontal Scroll control that allows scrolling over a set of images on X 
 
 1. Copy files to ios project
 2. Create a View and set the View Class to HorizontalScroll
+
+
+### Todo
+
+1. Get images from a Url List
