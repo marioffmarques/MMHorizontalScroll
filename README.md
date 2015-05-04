@@ -9,9 +9,7 @@ Swift Horizontal Scroll control that allows scrolling over a set of images on X 
 
 ## Example Use
 
-class ViewController: UIViewController, HorizontalScrollDelegate {
-
-    
+    class ViewController: UIViewController, HorizontalScrollDelegate {
     @IBOutlet weak var scroll: HorizontalScroll!
     
     override func viewDidLoad() {
@@ -31,7 +29,7 @@ class ViewController: UIViewController, HorizontalScrollDelegate {
     func HorizontalScrollDidSelectElement(scroll: UIScrollView, selectedView: UIView?, elementAtIndex: Int?) {
         NSLog("Select Elment")
     }
-}
+    }
 
 
 ### Todo
