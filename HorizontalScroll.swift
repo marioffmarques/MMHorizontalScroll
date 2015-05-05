@@ -170,6 +170,8 @@ import UIKit
                 var bottomTitle: UILabel = UILabel(frame: CGRectMake(0, 0, effectView.frame.width, effectView.frame.height))
                 
                 bottomTitle.textAlignment = NSTextAlignment.Center
+                bottomTitle.numberOfLines = 2
+                bottomTitle.adjustsFontSizeToFitWidth = true
                 bottomTitle.text = imagesTitles![i]
                 
                 if titleColor != nil{
