@@ -17,7 +17,10 @@ Swift Horizontal Scroll control that allows scrolling over a set of images on X 
             
             scroll.delegate = self
             
-            scroll.setUpScrollWithImagesPath(["backBlur.jpg", "backBlur.jpg"] , withAddButtonImage: "backBlur.jpg")
+            scroll.setUpScrollWithImagesPath(["backBlur.jpg", "backBlur.jpg"],
+            imagesTitles: ["Titulo1", "Titulo2"],
+            titleColor: UIColor.redColor(),
+            withAddButtonImage: "backBlur.jpg")
         }
     
     
