@@ -102,7 +102,7 @@ import UIKit
         view.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
         
         if(imageWidth == nil) {
-            imageWidth = self.scrollView.frame.width / 3
+            imageWidth = self.scrollView.frame.width / 2.5
         }
         
         if(imageHeight == nil) {
@@ -124,9 +124,14 @@ import UIKit
     }
     
     
-    func setUpScrollWithImagesPath(imagesPathArray: [String], withAddButtonImage addButtonImage: String?){
+    func setUpScrollWithImagesPath(imagesPathArray: [String], imagesTitles: [String]?, titleColor: UIColor?, withAddButtonImage addButtonImage: String?){
         
         if( imagesPathArray.count <= 0){
+            return
+        }
+        
+        if ( imagesTitles?.count < imagesPathArray.count ){
+            NSLog("Error: ImagesTitles must be not nil and have the amount of element such as the imagesPathArray")
             return
         }
         
@@ -134,28 +139,50 @@ import UIKit
         
         for var i = 0 ; i < scrollImages.count; i++ {
             
+            // Setup image Container View
             var imageContainerview = UIView()
             imageContainerview.alpha = 0
             
-            imageContainerview.frame = CGRectMake(CGFloat(10 + i*Int(imageWidth! + 10) ), 10, imageWidth!, imageHeight! ) // x, y, width, height
+            imageContainerview.frame = CGRectMake(CGFloat(10 + i*Int(imageWidth! + 10) ), 10, imageWidth!, imageHeight! )
             imageContainerview.tag = i;
-            
-            
-            var image: UIImage = UIImage(named: scrollImages[i])!
-            var imageView = UIImageView(image: image)
-            
-            
-            imageView.frame = CGRectMake(0,0,imageWidth!, imageHeight!)
-            
-            
-            // Add Tap Recognizer to the Image
-            var tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleImageTap:")
-            imageContainerview.addGestureRecognizer(tapGesture)
             imageContainerview.layer.cornerRadius = 5
             imageContainerview.clipsToBounds = true
             
+            var tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleImageTap:")
+            imageContainerview.addGestureRecognizer(tapGesture)
             
+            
+            // Setup image
+            var image: UIImage = UIImage(named: scrollImages[i])!
+            var imageView = UIImageView(image: image)
+            imageView.frame = CGRectMake(0,0,imageWidth!, imageHeight!)
+            
+            
+            // Add Blur effect with name
+            var blur: UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            var effectView: UIVisualEffectView = UIVisualEffectView(effect: blur)
+            effectView.frame = CGRectMake(0, imageHeight! - imageHeight! / 3.5 , imageWidth!, imageHeight! / 3.5)
+            
+
             imageContainerview.addSubview(imageView)
+            
+            if imagesTitles != nil {
+                var bottomTitle: UILabel = UILabel(frame: CGRectMake(0, 0, effectView.frame.width, effectView.frame.height))
+                
+                bottomTitle.textAlignment = NSTextAlignment.Center
+                bottomTitle.text = imagesTitles![i]
+                
+                if titleColor != nil{
+                    bottomTitle.textColor = titleColor!
+                }
+                
+                effectView.addSubview(bottomTitle)
+                imageContainerview.addSubview(effectView)
+            }
+            
+            
+            
+            
             self.scrollView.addSubview(imageContainerview)
 
             
