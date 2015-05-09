@@ -26,7 +26,6 @@ import UIKit
     @IBOutlet weak var labelFooter: UILabel!
     
     
-    
     @IBInspectable var title: String? {
         get {
             return labelTitle.text
@@ -42,6 +41,15 @@ import UIKit
         }
         set(_color) {
             labelTitle.textColor = _color
+        }
+    }
+    
+    @IBInspectable var scrollBackgroundColor: UIColor? {
+        get {
+            return scrollView.backgroundColor
+        }
+        set(_color) {
+            scrollView.backgroundColor = _color
         }
     }
     
@@ -101,17 +109,7 @@ import UIKit
         view.frame = bounds
         view.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
         
-        if(imageWidth == nil) {
-            imageWidth = self.scrollView.frame.width / 2.5
-        }
-        
-        if(imageHeight == nil) {
-            imageHeight = (view.frame.height - 5)
-        }
-        
         scrollView.layer.cornerRadius = 5
-        //setUpScrollImages()
-        
     }
     
     func LoadViewFromNib() -> UIView {
@@ -123,6 +121,7 @@ import UIKit
         return view
     }
     
+
     
     func setUpScrollWithImagesPath(imagesPathArray: [String], imagesTitles: [String]?, titleColor: UIColor?, withAddButtonImage addButtonImage: String?){
         
@@ -133,6 +132,14 @@ import UIKit
         if ( imagesTitles?.count < imagesPathArray.count ){
             NSLog("Error: ImagesTitles must be not nil and have the amount of element such as the imagesPathArray")
             return
+        }
+        
+        if(imageWidth == nil) {
+            imageWidth = self.scrollView.frame.width / 2.5
+        }
+        
+        if(imageHeight == nil) {
+            imageHeight = self.scrollView.frame.height - 20 //self.scrollView.frame.height - 10 //(view.frame.height - 5)
         }
         
         scrollImages = imagesPathArray
@@ -147,6 +154,8 @@ import UIKit
             imageContainerview.tag = i;
             imageContainerview.layer.cornerRadius = 5
             imageContainerview.clipsToBounds = true
+            
+            
             
             var tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleImageTap:")
             imageContainerview.addGestureRecognizer(tapGesture)
@@ -181,8 +190,6 @@ import UIKit
                 effectView.addSubview(bottomTitle)
                 imageContainerview.addSubview(effectView)
             }
-            
-            
             
             
             self.scrollView.addSubview(imageContainerview)
