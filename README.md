@@ -1,6 +1,12 @@
 # MMHorizontalScroll
 Swift Horizontal Scroll control that allows scrolling over a set of images on X axis. This control also provides a customizable title Header and Footer
 
+
+## Preview
+
+![alt tag](https://cloud.githubusercontent.com/assets/8614153/7550761/e7c64e2a-f665-11e4-9fc0-c92a23d622e1.jpg)
+
+
 ## Setup
 
 1. Copy files to ios project
