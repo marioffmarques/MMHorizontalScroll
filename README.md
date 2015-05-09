@@ -10,29 +10,34 @@ Swift Horizontal Scroll control that allows scrolling over a set of images on X 
 ## Example Use
 
     class ViewController: UIViewController, HorizontalScrollDelegate {
-        @IBOutlet weak var scroll: HorizontalScroll!
+
+    
+    @IBOutlet weak var scroll: HorizontalScroll!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            scroll.delegate = self
-            
-            scroll.setUpScrollWithImagesPath(["backBlur.jpg", "backBlur.jpg"],
-            imagesTitles: ["Titulo1", "Titulo2"],
-            titleColor: UIColor.redColor(),
-            withAddButtonImage: "backBlur.jpg")
-        }
-    
-    
-    
-        func HorizontalScrollDidSelectAddButton(scroll: UIScrollView, selectedView: UIView?) {
-            NSLog("Select add button")
-        }
-    
-        func HorizontalScrollDidSelectElement(scroll: UIScrollView, selectedView: UIView?, elementAtIndex: Int?) {
-            NSLog("Select Elment")
-        }
+        scroll.delegate = self
     }
+    
+
+    override func viewDidAppear(animated: Bool) {
+        
+        scroll.setUpScrollWithImagesPath(["images.jpeg", "image1.jpg", "image2.jpg"],
+            imagesTitles: ["This is a large title that fits to container", "Titulo2", "Titulo3"],
+            titleColor: UIColor.grayColor(),
+            withAddButtonImage: nil)
+    }
+
+
+    func HorizontalScrollDidSelectAddButton(scroll: UIScrollView, selectedView: UIView?) {
+        NSLog("Select add button")
+    }
+
+    func HorizontalScrollDidSelectElement(scroll: UIScrollView, selectedView: UIView?, elementAtIndex: Int?) {
+        NSLog("Select Element")
+    }
+}
 
 
 ### Todo
